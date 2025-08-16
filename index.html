@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Dilation Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Time Dilation & Redshift Explorer</h1>
+
+  <!-- Controls -->
+  <div id="controls">
+    <label>Radius (R/RS): <span id="radiusValue"></span></label>
+    <input type="range" id="radiusSlider" min="1.05" max="50" step="0.01" value="5">
+  </div>
+
+  <!-- Clocks -->
+  <div id="clocks">
+    <div>
+      <h3>Far Clock</h3>
+      <div id="clockFar">00:00:00</div>
+    </div>
+    <div>
+      <h3>Near Clock</h3>
+      <div id="clockNear">00:00:00</div>
+    </div>
+  </div>
+
+  <!-- Readouts -->
+  <div id="readouts">
+    <p>Time Dilation Factor: <span id="gammaDisplay"></span></p>
+    <p>Redshift z: <span id="zDisplay"></span></p>
+  </div>
+
+  <!-- Script -->
+  <script src="main.js"></script>
+</body>
+</html>

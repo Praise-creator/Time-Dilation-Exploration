@@ -1,0 +1,3 @@
+body { font-family: Arial, sans-serif; padding: 20px; }
+#clocks { display: flex; gap: 50px; margin-top: 20px; }
+#clockFar, #clockNear { font-size: 2em; background: #eee; padding: 20px; width: 150px; text-align: center; }
