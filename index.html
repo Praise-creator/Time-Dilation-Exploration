@@ -1,38 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Time Dilation Explorer</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Time Dilation & Redshift Explorer</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Time Dilation & Redshift Explorer</h1>
+  <header>
+    <h1>Time Dilation & Redshift Explorer</h1>
+    <button id="infoBtn" aria-label="Open info">i</button>
+  </header>
 
   <!-- Controls -->
-  <div id="controls">
-    <label>Radius (R/RS): <span id="radiusValue"></span></label>
-    <input type="range" id="radiusSlider" min="1.05" max="50" step="0.01" value="5">
-  </div>
+  <section id="controls">
+    <div class="row">
+      <label for="radiusSlider">Radius r / R<sub>s</sub>: <span id="radiusValue"></span></label>
+      <input type="range" id="radiusSlider" min="1.0001" max="50" step="0.0001" value="2.0" />
+    </div>
 
-  <!-- Clocks -->
-  <div id="clocks">
-    <div>
-      <h3>Far Clock</h3>
-      <div id="clockFar">00:00:00</div>
+    <div class="row">
+      <label>
+        <input type="checkbox" id="orbitToggle" />
+        Include orbital motion (circular orbit)
+      </label>
+      <span id="orbitBadge" class="badge"></span>
     </div>
-    <div>
-      <h3>Near Clock</h3>
-      <div id="clockNear">00:00:00</div>
+
+    <div class="row">
+      <button id="resetBtn">Reset clocks</button>
     </div>
-  </div>
+  </section>
+
+  <!-- Scene -->
+  <section id="scene">
+    <!-- Big black hole -->
+    <div id="bh"></div>
+
+    <!-- Far observer (the ship) as a tiny gray dot at far right -->
+    <div id="ship" title="Distant observer (far away)"></div>
+
+    <!-- Planet that moves with the slider -->
+    <div id="planet" title="Planet near the black hole"></div>
+  </section>
 
   <!-- Readouts -->
-  <div id="readouts">
-    <p>Time Dilation Factor: <span id="gammaDisplay"></span></p>
-    <p>Redshift z: <span id="zDisplay"></span></p>
-  </div>
+  <section id="readouts">
+    <div class="readout">
+      <div>Schwarzschild radius R<sub>s</sub>:</div>
+      <div><span id="RsKm"></span> km</div>
+    </div>
+    <div class="readout">
+      <div>r:</div>
+      <div><span id="rAbsKm"></span> km (<span id="rOverRs"></span> R<sub>s</sub>)</div>
+    </div>
+    <div class="readout">
+      <div>γ (dt/dτ):</div>
+      <div><span id="gammaDisplay"></span></div>
+    </div>
+    <div class="readout">
+      <div>Redshift z:</div>
+      <div>
+        <span id="zDisplay"></span>
+        <span id="redshiftChip" aria-label="Redshift color chip"></span>
+      </div>
+    </div>
+    <div class="readout">
+      <div>v/c (orbit only):</div>
+      <div><span id="betaDisplay">—</span></div>
+    </div>
+  </section>
 
-  <!-- Script -->
+  <!-- Clocks -->
+  <section id="clocks">
+    <div class="clockCard">
+      <h3>Far Clock</h3>
+      <div id="clockFar" class="clock">00:00:00</div>
+    </div>
+    <div class="clockCard">
+      <h3>Near Clock</h3>
+      <div id="clockNear" class="clock">00:00:00</div>
+    </div>
+  </section>
+
+  <!-- Info panel -->
+  <aside id="infoPanel" class="hidden">
+    <div class="infoContent">
+      <h2>What You’re Seeing</h2>
+      <p>
+        This explorer shows how time and light behave near a massive black hole (think Interstellar’s
+        Gargantua). The slider sets your radius <em>r</em> in units of the Schwarzschild radius
+        R<sub>s</sub>. The blue planet moves closer or farther from the black hole based on how you move the slider.
+      </p>
+      <h3>Gravitational time dilation</h3>
+      <p>
+        A stationary clock at radius <em>r</em> ticks slower than a distant clock by
+        <code>γ = 1 / sqrt(1 – R<sub>s</sub>/r)</code>. The Near Clock shows this slower proper time.
+      </p>
+      <h3>Gravitational redshift</h3>
+      <p>
+        Light climbing out of a gravity well loses energy (longer wavelength). The redshift is
+        <code>z = γ – 1</code>. The color chip and planet tint shift toward red as z grows.
+      </p>
+      <h3>Orbital motion (optional)</h3>
+      <p>
+        If you check “Include orbital motion”, we use the circular-orbit time dilation
+        (gravity + velocity). For Schwarzschild spacetime, the total factor is
+        <code>γ = 1 / sqrt(1 – 3R<sub>s</sub>/(2r))</code> (valid for r ≥ 1.5 R<sub>s</sub>; stable for r ≥ 3 R<sub>s</sub>).
+      </p>
+      <h3>More Information</h3>
+      <p>
+        For more information about the physics behind this demo, you can check out the readme of the github repository - https://github.com/Praise-creator/Time-Dilation-Exploration, or send me an email at olatide.praise7@gmail.com 
+      </p>
+      <button id="closeInfo">Close</button>
+    </div>
+  </aside>
+
   <script src="main.js"></script>
 </body>
 </html>
