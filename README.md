@@ -53,54 +53,60 @@ Inspired by the “Miller’s Planet” sequence in *Interstellar*.
 
 ## ⚛️ Physics Overview
 
-We assume a **Schwarzschild** (non-spinning) black hole with mass \(M\). The **Schwarzschild radius**:
-\[
-R_s \;=\; \frac{2GM}{c^2}.
-\]
+We assume a **Schwarzschild** (non-spinning) black hole with mass \( M \). The **Schwarzschild radius** is
+$$
+R_s = \frac{2GM}{c^2}.
+$$
 
-In the UI, you set \(r\) in units of \(R_s\) (i.e., \(r = \text{(slider)} \times R_s\)). A far-away observer’s coordinate time is \(t\); a local clock’s proper time is \(\tau\).
+In the UI, you set \( r \) in units of \( R_s \) (i.e., \( r = (\text{slider}) \cdot R_s \)). A far-away observer’s coordinate time is \( t \); a local clock’s proper time is \( \tau \).
 
 ### 1) Gravitational time dilation (static emitter)
 
-For a clock **hovering** (static) at radius \(r\),
-\[
-\boxed{\;\gamma_{\text{static}}(r) \;=\; \frac{dt}{d\tau} \;=\; \frac{1}{\sqrt{\,1-\frac{R_s}{r}\,}} \;}
-\]
+For a clock **hovering** (static) at radius \( r \),
+$$
+\boxed{\ \gamma_{\text{static}}(r) = \frac{dt}{d\tau} = \frac{1}{\sqrt{1-\frac{R_s}{r}}}\ }
+$$
 and the local clock ticks as \( d\tau = dt / \gamma_{\text{static}} \).
 
 ### 2) Gravitational redshift (static emitter)
 
-Light sent from radius \(r\) to infinity is redshifted by
-\[
-\boxed{\;1 + z_{\text{static}}(r) \;=\; \gamma_{\text{static}}(r) \;=\; \frac{1}{\sqrt{\,1-\frac{R_s}{r}\,}} \;}
-\quad\Rightarrow\quad z_{\text{static}} = \gamma_{\text{static}} - 1.
-\]
-We map \(z\) to a color so the planet grows redder as it approaches the black hole.
+Light sent from radius \( r \) to infinity is redshifted by
+$$
+\boxed{\ 1 + z_{\text{static}}(r) = \gamma_{\text{static}}(r) = \frac{1}{\sqrt{1-\frac{R_s}{r}}}\ }
+\quad\Rightarrow\quad
+z_{\text{static}} = \gamma_{\text{static}} - 1.
+$$
+We map \( z \) to a color so the planet grows redder as it approaches the black hole.
 
-### 3) Circular orbits (total time dilation vs infinity)
+### 3) Circular orbits (total time dilation vs. infinity)
 
-For a **circular geodesic** at radius \(r\) in Schwarzschild spacetime (equatorial plane), the **total** time-dilation factor (gravity + velocity) relative to infinity is:
-\[
-\boxed{\;\gamma_{\text{orbit}}(r) \;=\; \frac{dt}{d\tau} \;=\; \frac{1}{\sqrt{\,1 - \frac{3R_s}{2r}\,}} \;}
-\]
+For a **circular geodesic** at radius \( r \) in Schwarzschild spacetime (equatorial plane), the **total** time-dilation factor (gravity + velocity) relative to infinity is
+$$
+\boxed{\ \gamma_{\text{orbit}}(r) = \frac{dt}{d\tau} = \frac{1}{\sqrt{1 - \frac{3R_s}{2r}}}\ }.
+$$
 
-**Existence & stability:**
-- **No timelike circular orbits** for \( r \le \tfrac{3}{2}R_s \) (that’s the **photon sphere**).
+**Existence & stability**
+- **No timelike circular orbits** for \( r \le \tfrac{3}{2}R_s \) (the **photon sphere**).
 - **Unstable** circular orbits for \( \tfrac{3}{2}R_s < r < 3R_s \).
-- **Stable** circular orbits for \( r \ge 3R_s \) (ISCO at \(3R_s\)).
+- **Stable** circular orbits for \( r \ge 3R_s \) (ISCO at \( 3R_s \)).
 
 When **orbit mode** is ON, the Near Clock uses \( d\tau = dt / \gamma_{\text{orbit}} \), and the redshift readout uses \( z \approx \gamma_{\text{orbit}} - 1 \) as a **phase-averaged** proxy (see note below).
 
-### 4) Local orbital speed \(v\) as seen by a hovering observer
+### 4) Local orbital speed \( v \) as seen by a hovering observer
 
-A static (hovering) observer at the same \(r\) measures the orbiting object’s local speed as
-\[
-\boxed{\;\beta_{\text{local}}^2 \equiv \left(\frac{v}{c}\right)^2
-= \frac{\dfrac{R_s}{2r}}{1 - \dfrac{R_s}{r}} \;}
+A static (hovering) observer at the same \( r \) measures the orbiting object’s local speed as
+$$
+\boxed{\ \beta_{\text{local}}^2 \equiv \left(\frac{v}{c}\right)^2
+= \frac{\dfrac{R_s}{2r}}{1 - \dfrac{R_s}{r}}\ }
 \quad\Rightarrow\quad
-\beta_{\text{local}} = \sqrt{\frac{R_s}{2r\left(1-\frac{R_s}{r}\right)}}.
-\]
-This is shown as **\(v/c\)** in the UI when orbit mode is ON.
+\beta_{\text{local}} = \sqrt{\frac{R_s}{2r\!\left(1-\frac{R_s}{r}\right)}}.
+$$
+This is shown as \( v/c \) in the UI when orbit mode is ON.
 
+### 5) About orbital redshift & Doppler
 
-
+A moving source also produces **special-relativistic Doppler** shifts that depend on the **viewing angle** and **orbital phase**.  
+To keep the UI intuitive, we present a **phase-averaged** redshift using the same total factor:
+$$
+z_{\text{orbit,avg}}(r) \approx \gamma_{\text{orbit}}(r) - 1.
+$$
